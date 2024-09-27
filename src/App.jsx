@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
+import { MdWbSunny, MdNightsStay } from 'react-icons/md'; 
 import 'devextreme/dist/css/dx.light.css';
-import TableData from './components/TableData';
+import DataTable from './components/Ptable/DataTable'
 import { signin } from './constants/signin';
+import TableData from './components/TableData';
 
 // SignIn component
 const SignIn = ({ handleSignIn }) => {
@@ -28,6 +30,7 @@ const ProtectedRoute = ({ children, isAuth }) => {
 };
 
 const App = () => {
+        const [theme, setTheme] = useState('light');
         const [isAuth, setIsAuth] = useState(false);
         const navigate = useNavigate(); // Use this to programmatically navigate
 
@@ -37,7 +40,14 @@ const App = () => {
         const handleLogout = () => {
           setIsAuth(false);
   };
+  useEffect(() => {
+    // Apply the theme on mount
+    document.body.className = theme;
+  }, [theme]);
 
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
   // UseEffect to manage navigation based on authentication status
   useEffect(() => {
         if (isAuth) {
@@ -47,6 +57,12 @@ const App = () => {
   }, [isAuth, navigate]);
 
   return (
+      <>
+      <header>
+          <button onClick={toggleTheme} aria-label="Toggle Theme">
+          {theme === 'light' ? <MdNightsStay /> : <MdWbSunny />}
+        </button>
+      </header>
           <Routes>
             <Route path="/" element={<Navigate to="/tabledata" />} />
             <Route path="/signin" element={!isAuth ? <SignIn handleSignIn={handleSignIn} /> : <Navigate to="/tabledata" />} />
@@ -55,13 +71,16 @@ const App = () => {
               element={
                 <ProtectedRoute isAuth={isAuth}>
                   <div>
-                    <TableData />
+                    {/* <TableData /> */}
+                    <DataTable/>
+                    <br />
                     <button onClick={handleLogout}>Logout</button>
                   </div>
                 </ProtectedRoute>
               }
             />
           </Routes>
+      </>
   );
 };
 

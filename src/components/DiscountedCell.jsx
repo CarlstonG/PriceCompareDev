@@ -15,7 +15,7 @@ const DiscountCell = (cellData) => (
     endScaleValue={100}
   >
     <Size
-      width={150}
+      width={200}
       height={35}
     />
     <Margin

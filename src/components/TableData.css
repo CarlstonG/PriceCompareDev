@@ -1,0 +1,16 @@
+/* Example responsive design adjustments for DataGrid */
+.dx-datagrid {
+    overflow-x: auto;
+  }
+  
+  @media (max-width: 600px) {
+    .dx-datagrid {
+      font-size: 12px;
+    }
+  
+    /* Make column headers more compact */
+    .dx-datagrid-headers {
+      font-size: 11px;
+    }
+  }
+  

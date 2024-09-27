@@ -1,6 +1,38 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+
+*{
+  justify-content: center;
   text-align: center;
+}
+
+/* App.css */
+body.light {
+  background-color: white;
+  color: black;
+}
+
+body.dark {
+  background-color: #121212;
+  color: white;
+}
+
+header {
+  position: fixed; /* Fix the header at the top */
+  top: 0;          /* Align to the top */
+  right: 0;        /* Align to the right */
+  padding: 1rem;   /* Add some padding */
+  z-index: 1000;   /* Ensure it's on top of other elements */
+}
+
+button {
+  border: 1px solid #000000; /* Add border */
+  background: rgb(136, 131, 131);   /* Set background to transparent */
+  cursor: pointer;           /* Change cursor to pointer */
+  font-size: 1.5rem;        /* Set font size */
+  padding: 0.5rem 1rem;     /* Add padding for better clickability */
+  border-radius: 5px;       /* Optional: Add rounded corners */
+  transition: background 0.3s; /* Optional: Smooth background transition */
+}
+
+button:hover {
+  background: rgba(0, 0, 0, 0.1); /* Optional: Change background on hover */
 }
