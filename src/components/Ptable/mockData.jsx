@@ -71,6 +71,19 @@ export const mockData = [
       Customer: "Customer B",
       Image: "https://via.placeholder.com/155"
     }
+    ,
+    {
+      Id: 6,
+      Product: "Product 7",
+      Amount: 150,
+      Discount: 0.15,
+      SaleDate: "2023-05-11",
+      Region: "South",
+      Sector: "Clothing",
+      Channel: "Retail",
+      Customer: "Customer C",
+      Image: "https://via.placeholder.com/155"
+    }
     // More items...
   ];
   
