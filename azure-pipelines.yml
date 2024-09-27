@@ -7,7 +7,7 @@ pool:
    vmImage: 'ubuntu-latest'
 
 variables:
-   - group: Azure-Static-Web-Apps-icy-water-070cd8900-variable-group
+   - group: Azure-Static-Web-Apps-proud-water-0b542d000-variable-group
 
 steps:
    - task: NodeTool@0
