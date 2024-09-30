@@ -4,6 +4,7 @@ import './App.css';
 import { MdWbSunny, MdNightsStay } from 'react-icons/md'; 
 import 'devextreme/dist/css/dx.light.css';
 import DataTable from './components/Ptable/DataTable'
+import Chooser from './components/choosersTable/Chooser';
 import { signin } from './constants/signin';
 import TableData from './components/TableData';
 
@@ -17,10 +18,10 @@ const SignIn = ({ handleSignIn }) => {
   };
 
   return (
-    <div>
-      <h2>Please Sign In</h2>
-      <button onClick={onSignIn}>Sign In</button>
-    </div>
+    <div className="SignIn">
+    <h2>Please Sign In</h2>
+    <button onClick={onSignIn}>Sign In</button>
+  </div>
   );
 };
 
@@ -62,9 +63,11 @@ const App = () => {
           <button onClick={toggleTheme} aria-label="Toggle Theme">
           {theme === 'light' ? <MdNightsStay /> : <MdWbSunny />}
         </button>
+        {isAuth && <button onClick={handleLogout}>Logout</button>} {/* Conditional rendering of the Logout button */}
       </header>
           <Routes>
             <Route path="/" element={<Navigate to="/tabledata" />} />
+            <Route path="/chooser" element={<Navigate to="/Chooser" />} />
             <Route path="/signin" element={!isAuth ? <SignIn handleSignIn={handleSignIn} /> : <Navigate to="/tabledata" />} />
             <Route
               path="/tabledata"
@@ -72,9 +75,9 @@ const App = () => {
                 <ProtectedRoute isAuth={isAuth}>
                   <div>
                     {/* <TableData /> */}
-                    <DataTable/>
+                   <DataTable/> 
+                   {/* <Chooser/> */}
                     <br />
-                    <button onClick={handleLogout}>Logout</button>
                   </div>
                 </ProtectedRoute>
               }
