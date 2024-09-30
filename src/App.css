@@ -1,7 +1,12 @@
 
-*{
-  justify-content: center;
-  text-align: center;
+.SignIn {
+  display: flex;            /* Enable flexbox */
+  flex-direction: column;   /* Align items in a column */
+  justify-content: center;   /* Center vertically */
+  align-items: center;       /* Center horizontally */
+  height: 100vh;   
+  width: 100vw;         /* Full height of the viewport */
+  text-align: center;        /* Center text inside the component */
 }
 
 /* App.css */
@@ -31,8 +36,15 @@ button {
   padding: 0.5rem 1rem;     /* Add padding for better clickability */
   border-radius: 5px;       /* Optional: Add rounded corners */
   transition: background 0.3s; /* Optional: Smooth background transition */
+  margin-right: 2px;
 }
 
 button:hover {
   background: rgba(0, 0, 0, 0.1); /* Optional: Change background on hover */
+}
+
+.responsive-table
+{
+  height: 500px;
+  overflow-y: hidden;
 }
