@@ -1,29 +1,63 @@
-// TableData.js
 import React, { useEffect, useState } from 'react';
-import { DataGrid, Column, Paging, Pager, SearchPanel } from 'devextreme-react/data-grid';
+import { DataGrid, Column, Paging, SearchPanel } from 'devextreme-react/data-grid';
 import 'devextreme/dist/css/dx.light.css';
 import { mockData } from './mockData'; // Import the mock data
 import Modal from '../../constants/Modal'; // Import the Modal component
 
-const fetchData = async () => {
+// Function to get the OAuth token
+const getToken = async () => {
   try {
-    const response = await fetch('https://gateway.officebrands.com.au/v1/idg/product/productsearchcurrentpricesbyothercodes', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        // Add other necessary headers
-      },
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("API failed, using mock data:", error);
-    return mockData; // Return mock data in case of error
-  }
-};
+                  const response = await fetch(`https://login.microsoftonline.com/${import.meta.env.VITE_AZURE_TENANT_ID}/oauth2/token`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                          body: new URLSearchParams({
+                            grant_type: 'client_credentials',
+                            client_id: import.meta.env.VITE_AZURE_CLIENT_ID,
+                            client_secret: import.meta.env.VITE_AZURE_CLIENT_SECRET,
+                            resource: import.meta.env.VITE_AZURE_RESOURCE,
+                                })
+                  });
+    
+                          const tokenData = await response.json();
+                          return tokenData.access_token;
+                                          } 
+                            catch (error) {
+                              console.error('Failed to get token:', error);
+                                            return null;
+                }
+              };
+
+// Fetch data with token
+const fetchData = async () => {
+const token = await getToken(); // Get the OAuth token
+
+              if (!token) {
+                console.error('Token not available');
+                return mockData; // Fallback to mock data
+              }
+
+              try {
+                const response = await fetch('https://gateway.officebrands.com.au/v1/idg/product/productsearchcurrentpricesbyothercodes', {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Use Bearer token for authentication
+                  },
+                });
+
+                if (!response.ok) {
+                  throw new Error('HTTP error ' + response.status);
+                }
+
+                const data = await response.json();
+                return data;
+              } catch (error) {
+                console.error('API failed, using mock data:', error);
+                return mockData; // Fallback to mock data in case of error
+              }
+            };
 
 const TableData = () => {
   const [data, setData] = useState([]);
@@ -47,7 +81,6 @@ const TableData = () => {
   }, []);
 
   const handleButtonClick = async (item) => {
-    // Set the item data to show in the modal
     setModalData(item);
     setModalOpen(true); // Open the modal
   };
@@ -87,7 +120,7 @@ const TableData = () => {
           )}
           cellRender={({ data }) => (
             <div style={{
-              borderRight: '1px solid black',
+              borderRight: '1px solid grey',
               textAlign: 'center',
               height: '70px',
               display: 'flex',
@@ -105,18 +138,12 @@ const TableData = () => {
         />
         <Column dataField="compdataCompetitor" caption="Competitor" alignment="right" />
         <Column dataField="compdataCompetitorStock" caption="Stock" alignment="right" />
-        <Column dataField="compdataPriceScrapeDate" caption="Last Scrape" dataType="date" />
-
-        {/* Actions column with a button containing '...' */}
-       
-
-        {/* Additional columns */}
+        {/* <Column dataField="compdataPriceScrapeDate" caption="Last Scrape" dataType="date" /> */}
         <Column dataField="compdataCompetitorBarcode" caption="Barcode" alignment="right" />
         <Column dataField="compdataCompetitorManufacturerCode" caption="Manufacturer Code" alignment="right" />
         <Column dataField="compdataPriceScrapeDate" caption="Price Inc" alignment="right" />
 
         <Paging defaultPageSize={7} />
-       
       </DataGrid>
 
       {/* Modal */}
