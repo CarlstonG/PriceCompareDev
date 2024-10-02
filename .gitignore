@@ -1,8 +1,7 @@
 # Logs
 logs
 .env
-src/devextreme-license.ts
-src/devextreme-license.js
+
 dist
 *.log
 npm-debug.log*
