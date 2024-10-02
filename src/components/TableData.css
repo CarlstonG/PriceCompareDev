@@ -1,9 +1,5 @@
 /* Example responsive design adjustments for DataGrid */
 
-.dx-datagrid {
-  overflow-x: hidden;
-  height: 500px;
-}
   @media (max-width: 600px) {
     .dx-datagrid {
       font-size: 12px;

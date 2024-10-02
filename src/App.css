@@ -1,4 +1,91 @@
+/* Nav header */
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  width: 200px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
 
+nav {
+  flex: 1;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  margin-bottom: 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  color: #ecf0f1;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #1decc3;
+  border: none;
+  color: black;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #16a085;
+}
+
+.theme-toggle-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+/* Main content styling */
+.main-content {
+  margin-left: 220px; /* Push the content to the right to account for the sidebar */
+  padding: 20px;
+}
+
+/* SignIn component styling */
+.SignIn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.SignIn h2 {
+  margin-bottom: 20px;
+}
+
+.SignIn button {
+  background-color: #1decc3;
+}
+
+.SignIn button:hover {
+  background-color: #3498db;
+}
 .SignIn {
   display: flex;            /* Enable flexbox */
   flex-direction: column;   /* Align items in a column */
@@ -28,23 +115,22 @@ header {
   z-index: 1000;   /* Ensure it's on top of other elements */
 }
 
-button {
-  border: 1px solid #000000; /* Add border */
-  background: rgb(136, 131, 131);   /* Set background to transparent */
-  cursor: pointer;           /* Change cursor to pointer */
-  font-size: 1.5rem;        /* Set font size */
-  padding: 0.5rem 1rem;     /* Add padding for better clickability */
-  border-radius: 5px;       /* Optional: Add rounded corners */
-  transition: background 0.3s; /* Optional: Smooth background transition */
-  margin-right: 2px;
-}
-
-button:hover {
-  background: rgba(0, 0, 0, 0.1); /* Optional: Change background on hover */
-}
-
 .responsive-table
 {
   height: 500px;
   overflow-y: hidden;
+}
+
+.logout-button{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.chooser-button{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+  
 }
