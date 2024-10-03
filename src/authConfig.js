@@ -16,7 +16,7 @@ export const msalConfig = {
    auth: {
       clientId: 'f252e02d-60c4-457f-ae15-e45c1a1b83b1', // This is the ONLY mandatory field that you need to supply.
       authority: 'https://login.microsoftonline.com/bd394f47-48ea-439b-9e9c-aad183cfa4ac', // Replace the placeholder with your tenant subdomain
-      redirectUri: 'http://localhost:3000', // Pointss to window.location.origin. You must register this URI on Microsoft Entra admin center/App Registration.
+      redirectUri: 'https://proud-water-0b542d000.5.azurestaticapps.net', // Pointss to window.location.origin. You must register this URI on Microsoft Entra admin center/App Registration.
       postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
       navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
    },
