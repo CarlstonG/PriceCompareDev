@@ -13,7 +13,7 @@ import './styles/App.css';
 import 'devextreme/dist/css/dx.light.css';
 import config from 'devextreme/core/config';
 import { licenseKey } from './devextreme-license';
-import DataGridComponent from './components/Pages/DataGridComponent';
+
 
 import AdminLogin from './components/Pages/AdminLogin'
 import Dashboard from './components/Pages/Dashboard';
@@ -97,7 +97,6 @@ const MainContent = () => {
    return (
       <div className="App">
          <AuthenticatedTemplate>
-            {/* <DataGridComponent/> */}
             <Dashboard/>
          </AuthenticatedTemplate>
          <UnauthenticatedTemplate>

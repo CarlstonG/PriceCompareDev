@@ -18,7 +18,7 @@ const Dashboard = () => {
       <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
          {/* Conditionally render Card or DataGridComponent */}
          {!showDataGrid ? (
-            <div className="card bg-white shadow-lg rounded-lg p-6 text-center w-full max-w-md">
+            <div className="card bg-white shadow-lg rounded-lg p-5 text-center w-full max-w-md">
                <h2 className="text-2xl font-bold mb-4">View Data Compare</h2>
                <p className="mb-4">Click to see data comparison in a grid.</p>
                <button
