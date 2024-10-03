@@ -6,16 +6,18 @@ import { PageLayout } from './components/PageLayout/PageLayout';
 import { loginRequest } from './authConfig';
 import React from 'react';
 import 'devextreme/data/odata/store';
-import DataGrid, { Column, Paging, Pager } from 'devextreme-react/data-grid';
 import CustomStore from 'devextreme/data/custom_store';
 import 'whatwg-fetch';
 import axios from 'axios';
 import './styles/App.css';
-import { Button } from 'react-bootstrap';
 import 'devextreme/dist/css/dx.light.css';
 import config from 'devextreme/core/config';
 import { licenseKey } from './devextreme-license';
 import DataGridComponent from './components/Pages/DataGridComponent';
+
+import AdminLogin from './components/Pages/AdminLogin'
+import Dashboard from './components/Pages/Dashboard';
+
 
 /**
  * Most applications will need to conditionally render certain components based on whether a user is signed in or not.
@@ -95,35 +97,13 @@ const MainContent = () => {
    return (
       <div className="App">
          <AuthenticatedTemplate>
-            {/* <div className="dx-viewport p-4">
-               <DataGrid dataSource={store} showBorders={true} remoteOperations={true}>
-                  <Column dataField="ezCode" dataType="number" />
-                  <Column dataField="amount" dataType="float" format="currency" />
-                  <Column dataField="productDescription" />
-                  <Column dataField="buyUOM" />
-                  <Column dataField="rq" />
-                  <Column dataField="moq" />
-                  <Paging defaultPageSize={12} />
-                  <Pager showPageSizeSelector={true} allowedPageSizes={allowedPageSizes} />
-               </DataGrid>
-            </div> */}
-            <DataGridComponent/>
+            {/* <DataGridComponent/> */}
+            <Dashboard/>
          </AuthenticatedTemplate>
          <UnauthenticatedTemplate>
-         <div className="flex flex-col items-center justify-center min-h-screen">
-         <h1 className="text-center font-bold p-3 text-lg mt-1">Admin Login</h1>
-          <button
-            onClick={handleLoginRedirect}
-            className="flex items-center justify-center bg-blue-600 text-white font-bold py-2 px-4 rounded-lg w-64 hover:bg-blue-700 transition-colors"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
-              alt="Microsoft Logo"
-              className="h-6 w-6 mr-2"
-            />
-            Sign in with Microsoft
-          </button>
-          </div>
+           
+          <AdminLogin handleLoginRedirect={handleLoginRedirect} />
+
          </UnauthenticatedTemplate>
       </div>
    );
