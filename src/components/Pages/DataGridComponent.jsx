@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DataGrid, { Column, Paging, Pager } from 'devextreme-react/data-grid';
 import CustomStore from 'devextreme/data/custom_store';
 import { useMsal } from '@azure/msal-react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Import the search icon
 
 const DataGridComponent = () => {
   const { instance } = useMsal();
   const activeAccount = instance.getActiveAccount();
+  const [searchQuery, setSearchQuery] = useState('7001875'); // default search query
 
   function isNotEmpty(value) {
     return value !== undefined && value !== null && value !== '';
@@ -26,7 +29,7 @@ const DataGridComponent = () => {
 
       try {
         const paramRequest = {
-          searchQuery: '7001875',
+          searchQuery: searchQuery, // Use the state value here
           advanceSearchEnabled: false,
           skip: textObj.skip,
           size: textObj.take,
@@ -34,7 +37,7 @@ const DataGridComponent = () => {
 
         const tokenRequest = {
           account: activeAccount,
-          scopes: ['api://4bdc6b82-01c9-4ef9-858b-8badb622ad9c/api.scope'], // Replace with your scope
+          scopes: ['api://4bdc6b82-01c9-4ef9-858b-8badb622ad9c/api.scope'],
         };
 
         const responsex = await instance.acquireTokenSilent(tokenRequest);
@@ -51,23 +54,40 @@ const DataGridComponent = () => {
           }
         );
 
-        console.log(response.data); // Log the response data to verify structure
-
         return {
           data: response.data.itemCollection,
           totalCount: response.data.totalCount,
         };
       } catch (err) {
-        console.error(err); // Log any errors
+        console.error(err);
         throw new Error('Data Loading Error');
       }
     },
   });
 
+  // Define the handleSearch function to update the search query state
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value); // Update the search query state
+  };
+
   const allowedPageSizes = [8, 12, 20];
 
   return (
     <div className="dx-viewport p-4">
+      <div className="flex items-center mb-4">
+        {/* Search Input with Icon */}
+        <div className="relative flex items-center">
+          <FontAwesomeIcon icon={faSearch} className="absolute left-3 text-gray-400" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearch}
+            className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+            placeholder="Search product..."
+          />
+        </div>
+      </div>
+
       <DataGrid dataSource={store} showBorders={true} remoteOperations={true}>
         <Column dataField="ezCode" dataType="number" />
         <Column dataField="amount" dataType="float" format="currency" />

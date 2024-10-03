@@ -7,10 +7,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const navigation = [
-   { name: 'Dashboard', href: '#', current: true },
-   { name: 'Team', href: '#', current: false },
-   { name: 'Projects', href: '#', current: false },
-   { name: 'Calendar', href: '#', current: false },
+   { name: 'Dashboard', href: '#', current: false },
+   { name: 'PriceCompare', href: '#', current: false },
+   { name: 'Graph (indev)', href: '#', current: false },
 ];
 
 function classNames(...classes) {

@@ -110,8 +110,20 @@ const MainContent = () => {
             <DataGridComponent/>
          </AuthenticatedTemplate>
          <UnauthenticatedTemplate>
-            <h1 class="mt-5">Your Are Not Logged In</h1>
-            <Button onClick={handleLoginRedirect}>Sign in</Button>
+         <div className="flex flex-col items-center justify-center min-h-screen">
+         <h1 className="text-center font-bold p-3 text-lg mt-1">Admin Login</h1>
+          <button
+            onClick={handleLoginRedirect}
+            className="flex items-center justify-center bg-blue-600 text-white font-bold py-2 px-4 rounded-lg w-64 hover:bg-blue-700 transition-colors"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+              alt="Microsoft Logo"
+              className="h-6 w-6 mr-2"
+            />
+            Sign in with Microsoft
+          </button>
+          </div>
          </UnauthenticatedTemplate>
       </div>
    );
